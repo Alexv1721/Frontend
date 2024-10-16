@@ -1,0 +1,43 @@
+.logpage{
+    width: 100%;
+    height: 100vh;
+
+    background-color: rgb(18, 47, 102);
+}
+.login{
+    display: flex;
+    flex-direction: column;
+ position: absolute;
+ left: 50%;
+ gap: 10px;
+top:50%;
+transform: translate(-50%,-50%);
+padding: 40px;
+
+border-radius: 10px;
+background-image: url('b.webp');
+background-size: cover;
+background-repeat: no-repeat;
+}
+.lbn{
+    width: 70px;
+    background-color: rgb(141, 165, 165);
+}
+.un,.up{
+    padding: 6px;
+    outline: none;
+}
+.login>div,button{
+    color: whitesmoke;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.err{
+    color: red;
+    font-size: 13px;
+}
+a{
+    color: whitesmoke;
+    text-align: center;
+}
+

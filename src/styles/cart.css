@@ -1,0 +1,198 @@
+.cart{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin:50px;
+  border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+padding: 20px;
+}
+
+.cimg{
+    width: 100px;
+    height: auto;
+}
+button{
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.cleft{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.crating{
+    color: #07c;
+}
+.cprice{
+    color: rgb(255, 67, 5);
+    font-size: 20px;
+}
+.ctexts{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-wrap: nowrap;
+}
+.cimg{
+  max-width: 100px;
+
+}
+.ctitle{
+    font-size: 23px;
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.cdes{
+    font-size: 12px;
+    opacity: 0.7;
+    font-family:'Times New Roman', Times, serif;
+}
+select{
+    padding: 6px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+background-color: rgb(202, 202, 202);
+border: none;
+border-radius: 5px;
+}
+.pdetails{
+    display: flex;
+    align-items: center;
+    margin-top:-50px;
+    justify-content: space-around;
+
+}
+.pdetails>div>p{
+    margin-top: 10px;
+}
+
+.delfree{
+    text-decoration: line-through;
+    color: red;
+}
+.pd{
+   font-size: 25px;
+   color:#7aa7c7;
+   font-family:'Times New Roman', Times, serif;
+}
+.emtycart{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.placeorder{
+    background-color: #0066ff;
+    margin-top: 20px;
+    color: white;
+}
+.pp{
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.buybn {
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  width: 100px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-8:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+.del{
+    color: #25d366;
+    font-size: 17px;
+    font-style: italic;
+}
+
+
+
+.rbn {
+  background-color: #ff2f00;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  width: 100px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-7:hover,
+.button-7:focus {
+  background-color: #07c;
+}
+
+.button-7:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-7:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
+.carts{
+  width: 100%;
+  height: 100vh;
+}
+.gbn{
+  background-color: #0095ff;
+}

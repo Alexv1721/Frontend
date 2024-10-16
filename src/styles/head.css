@@ -1,0 +1,38 @@
+.head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+ margin: 13px;
+ background-color: #1a1a2e;
+ padding: 10px;
+}
+span{
+    color: red;
+}
+.logo{
+    width: 50px;
+    height: 40px;
+}
+.add,.admin{
+    max-width: 100px;
+    height: 20px;
+    cursor: pointer;
+}
+.search{
+    width: 50%;
+    background-color: rgb(237, 238, 238);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    color: violet;
+}
+.orderimg{
+    max-width: 100px;
+    height: 20px;   
+    cursor: pointer;
+}
+.nbn{
+    background-color:#0095ff;
+}

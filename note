@@ -1,0 +1,38 @@
+`Outlet` is a component from `react-router-dom` that acts as a placeholder to render child routes inside a parent route. In simpler terms, it’s like a spot where the pages that match the current URL will be displayed.
+
+### How `Outlet` Works:
+
+Suppose you have a main layout that should stay the same across different pages (like a header, footer, or sidebar), but the content in the middle should change based on the route (like home page, cart, or order). The `Outlet` is where that dynamic content gets injected.
+
+### Example in Tanglish:
+
+Imagine you have a parent route like your `/` route in the `PrivateRoute`. Inside that route, you have other sub-routes like `/cart`, `/order`, and `/buy/:id`. When a user visits these pages, the changing part of the page will be displayed where the `Outlet` is placed.
+
+#### Code Explanation in Tanglish:
+
+```jsx
+import { Outlet } from 'react-router-dom';
+
+function MainLayout() {
+  return (
+    <div>
+      <Header /> {/* Header innum nalla irukkum */}
+      <div className="content">
+        <Outlet /> {/* Inga child routes varum */}
+      </div>
+      <Footer /> {/* Footer innum nalla irukkum */}
+    </div>
+  );
+}
+```
+
+- **`Header` irundhaal**: Idhu ellaa page-um same-a irukkum. Like "Home", "Profile", or "Cart" nu buttons irukkalaam.
+- **`Outlet`**: Inga thaaan dynamic content varum. Example, nee `/cart` path-a visit panna, `Cart` component inga render aagum. `/order` path pottu paathaalum inge render aagum.
+- **`Footer` irundhaal**: Idhu kooda ellaa page-um same-a irukkum.
+
+So, `Outlet` app-la enna page view pannurathu nu solradha paathu, andha page-oda content-a `MainLayout` kulla inject panradhu.
+
+In simpler words, it’s a "dynamic content placeholder."
+
+
+ #0095ff blue

@@ -1,0 +1,191 @@
+.b{
+    width: 80%;
+ 
+    height: auto;
+    display: flex;
+    
+align-items: center;
+position: absolute;
+left: 50%;
+border-radius: 10px;
+top: 50%;
+gap: 90px;
+transform: translate(-50%,-50%);
+background-color:  #f7f7f7;
+    }
+.buyimg{
+max-width: 100%;
+    height: 250px;
+    padding: 40px;
+}
+
+.btitle{
+    font-size: 22px;
+   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-weight: 300;
+}
+.bdes{
+    color: rgb(146, 155, 164);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.breview{
+    color: rgb(255, 67, 5);
+}
+.bprice{
+    margin-top: 20px;
+    font-size: 25px;
+    color: rgb(255, 67, 5);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.bb{
+    color: rgb(146, 155, 164);
+    font-size: 13px;
+}
+.cr{
+  color: rgb(255, 67, 5);
+}
+.buyn {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid #0095ff;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  transition: all 250ms;
+}
+
+.buyn:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+
+.buyn:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+.addbn {
+  background-color: #0095ff;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  outline: none;
+  padding: 12px .8em;
+  position: relative;
+  text-align: center;
+}
+
+.button-7:hover,
+.button-7:focus {
+  background-color: #07c;
+}
+
+.button-7:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-7:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
+
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-8:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+@media screen and (max-width:660px){
+  .btitle,.bprice{
+    font-size: 18px;
+  }
+
+.bdes{
+  font-size: 14px;
+}
+.breview{
+  font-size: 13px;
+}
+.bdes>span{
+  font-size: 14px;
+}
+}
+@media screen and (max-width:525px){
+  .btitle,.bprice{
+    font-size: 17px;
+  }
+  .bdes{
+    font-size: 14px;
+  }
+  .bdes>span, .breview{
+    font-size: 15px;
+  }
+  .addbn,.buyn{
+    padding: 8px;
+    font-size: 11px;
+  }
+
+}
+
+@media screen  and (max-width:430px){
+  .bdes>span, .breview{
+    font-size: 13px;
+  }
+  .addbn,.buyn{
+    padding: 4px;
+    font-size: 10px;
+  }
+  .btitle,.bprice{
+    font-size: 15px;
+  }
+  .bdes{
+    font-size: 14px;
+  }
+}
+@media screen  and (max-width:415px){
+  .bdes>span, .breview{
+    font-size: 11px;
+  }
+  .addbn,.buyn{
+    padding: 3px;
+    font-size: 8px;
+  }
+  .btitle,.bprice{
+    font-size: 12px;
+  }
+  .bdes{
+    font-size: 12px;
+  }
+}
+
+.buy{
+  width: 100%;
+  height: 100vh;
+  background-color: #d8d8d8;
+opacity: .8;
+
+}
