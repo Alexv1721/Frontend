@@ -4,31 +4,28 @@ import axios from 'axios'
 const initialState={
     status:'idle',
     err:'',
-    products:[]
+    userdetail:{_id:'',emai:'' ,password:'',role:'',username:''}
 }
-export const fetchproduct=createAsyncThunk('products/fetchproduct',async()=>{
+export const fetchproduct=createAsyncThunk('user/user',async()=>{
     localStorage.getItem('token')
-    const res=await axios.get('http://localhost:5000/products/allproducts',
+    const res=await axios.get('http://localhost:5000/user/user',
         {headers:{Authorization:localStorage.getItem('token')}}
     )
+
     return res.data.data
 })
-export const pro=createSlice(
-    {  name:'pro',
-        initialState,
-        reducers:{
-productfilter:(state,action)=>{
-    state.products=state.products
-const s=state.products.filter((item)=>{
-    if(item.category==action.payload){
-return item
-    }
 
-})
-state.products=s
-}
-        }
-        ,extraReducers:(builder)=>{
+
+export const user=createSlice(
+    {  name:'user',
+        initialState,
+reducers:{
+    clearUser:(state,payload)=>{
+state.status='idle'
+state.userdetail={_id:'',emai:'' ,password:'',role:'',username:''}
+    }
+},
+        extraReducers:(builder)=>{
             builder.addCase(fetchproduct.pending,(state,action)=>{
 state.status='loading'
             })
@@ -37,12 +34,12 @@ state.status='loading'
                 console.log(action.error.message);
                 
                             }).addCase(fetchproduct.fulfilled,(state,action)=>{
-                                state.products=action.payload
+                                state.userdetail=action.payload
                                 state.status='success'
                             })
         }
     }
 )
+export default user.reducer
+export const {clearUser}=user.actions
 
-export default pro.reducer
-export const {productfilter}=pro.actions

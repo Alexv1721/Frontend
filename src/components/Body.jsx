@@ -7,23 +7,21 @@ import Header from '../components/Header';
 import Product from '../components/Product';
 import { productfilter } from '../app/productsSlice'
 import { useNavigate } from 'react-router-dom';
+import AdminPanel from './AdminPanel'
 const Body = ({search,setsearch}) => {
    const session=useSelector((state)=>state.log.session)
     const nav=useNavigate()
     const[cato,setcat]=useState('')
+    const user=useSelector((state)=>state.user.userdetail)
     const cat=useSelector((state)=>state.cat.categories)
-    const status=useSelector((state)=>state.cat.status)
+    const status=useSelector((state)=>state.pro.status)
     const err=useSelector((state)=>state.cat.err)
    const dis=useDispatch()
    const images= ['com.jpg','jwel.jpg','cloth.jpg','girls.jpg']
    const[vis,setvis]=useState(true)
    const[ses,setses]=useState('')
   let s=''
-  function  handlesession()
-{
-  setses('/')
 
-}
    useEffect(()=>{
 if(status=='idle'){
     dis(fetchcat())
@@ -31,25 +29,26 @@ if(status=='idle'){
 }
 },[status])
 
+function handlefilter(filter){
+  setvis(false)
+  setcat(filter)
 
-// setpro()
- 
-function handlefilter(name){
-    setcat('')
-    setvis(false)
-setcat(name)
-}
   
-return (
-    <div className=''>
+}
+
+return (<div className=''>
+      {/* {user.role=='admin'?<AdminPanel/>: */}
+<div>
+<Header/>
             <hr/>
         <div className='body'>
-        {status=='loading' && <div className='load'>Loading...</div>}
+          
+        {status=='loading' ? <div className='load'>Loading...</div>:<div></div>}
         {
             cat.map((item,index)=>
             {
                 return( 
-                <div className='catitem' onClick={()=>nav(s)} >
+                <div className='catitem' onClick={()=>handlefilter(item)} >
                   
                     <img className='catimg' src={images[index]} alt=""/>
                     <p>{item}</p>
@@ -70,6 +69,9 @@ return (
     },5000)
 
       } */}
+</div>
+      
+         
     </div>
   )
 }

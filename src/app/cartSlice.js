@@ -9,7 +9,13 @@ const initialState = {
 };
 
 export const fetchcart = createAsyncThunk('cart/fetchcart', async () => {
-    const res = await axios.get('http://localhost:5000/cart/carts');
+   console.log('cart',localStorage.getItem('token'));
+
+   
+    const res = await axios.get('http://localhost:5000/cart/carts',
+        {headers:{Authorization:localStorage.getItem('token')}}
+    );
+    console.log(res);
     return res.data;
 });
 

@@ -1,59 +1,110 @@
-import React, { useState } from 'react'
-import '../styles/login.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { userlogin } from '../app/loginSlice'
-import axios from 'axios'
+import React, { useState, useRef, useEffect, CSSProperties } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/login.css';
+import { fetchproduct } from '../app/userSlice';
+import BarLoader from "react-spinners/BarLoader";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 const Login = () => {
-const [uname,setuname]=useState('')
-const [pwd,setpwd]=useState('')
-const[err,seterr]=useState('')
-const[perr,setperr]=useState('')
-const un=useSelector((state)=>state.log.uname)
-const pw=useSelector((state)=>state.log.password)
-const nav=useNavigate('')
-const dis=useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.user.status);
+  const [loading, setLoading] = useState(false);
+  const [uname, setUname] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [err, setErr] = useState('');
+  const [perr, setPerr] = useState('');
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
-const [u,setu]=useState('')
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchproduct());
+    }
+  }, [status, dispatch]);
 
-console.log(sessionStorage.getItem('token'));
+  const validateForm = () => {
+    setErr('');
+    setPerr('');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!uname) {
+      setErr('Email is required');
+      return false;
+    } else if (!emailPattern.test(uname)) {
+      setErr('Enter a valid email');
+      return false;
+    }
+    if (!pwd) {
+      setPerr('Password is required');
+      return false;
+    }
+    return true;
+  };
 
-async function handlelogin(){
+  async function handleLogin() {
+    if (!validateForm()) return;
 
-const data={email:uname,password:pwd}
-const user=await axios.post('http://localhost:5000/api/login',data).then((data)=>  localStorage.setItem('token', data.data.token)
- ).catch((err)=>console.log(err)
- )
- nav('/')
+    setLoading(true);
+    try {
+      const user = await axios.post('http://localhost:5000/user/login', { email: uname, password: pwd });
+      localStorage.setItem('token', user.data.token);
+      const roleResponse = await axios.get('http://localhost:5000/user/role', {
+        headers: { Authorization: localStorage.getItem('token') },
+      });
+      navigate(roleResponse.data.data === 'admin' ? '/admin' : '/');
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        if (error.response.data.message.includes('Invalid email')) setErr('Invalid email');
+        else if (error.response.data.message.includes('Invalid password')) setPerr('Invalid password');
+      } else {
+        setErr('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
-
-}
-  return (
+  return loading ? (
     <div className='logpage'>
-      <div className='login'>
+      <BarLoader cssOverride={override} size={150} color='red' loading={loading} aria-label="Loading Spinner" data-testid="loader" />
+    </div>
+  ) : (
+    <div className='login'>
       <div>
-        Login
+        <input
+          onChange={(e) => setUname(e.target.value)}
+          placeholder='Email'
+          className={`un ${err ? 'input-error-custom' : ''}`}
+          type="text"
+          value={uname}
+          ref={emailRef}
+        />
+        <span className='form-error-custom'>{err}</span>
       </div>
-      <br />
-     <div> UserName: <input onChange={(e)=>
-        setuname(e.target.value)
-     
-     } className='un' type="text" name="" id="" /></div>
-     <span className='err'>{err}</span>
-     <br />
-     <div>PassWord: <input onChange={(e)=>
-        setpwd(e.target.value)
- 
-     } className='up' type="text" name="" id="" /></div>
-     <span className='err'>{perr}</span>
-     <br />
-     <div><input type="checkbox" name="" id="" /> Remember me</div>
-    <center> <button className='lbn' onClick={()=>handlelogin()}>Login</button></center>
-         
-         <a href="">Forgot password</a>
+      <div>
+        <input
+          onChange={(e) => setPwd(e.target.value)}
+          placeholder='Password'
+          className={`up ${perr ? 'input-error-custom' : ''}`}
+          type="password"
+          value={pwd}
+          ref={passwordRef}
+        />
+        <span className='form-error-custom'>{perr}</span>
       </div>
-         </div>
-  )
-}
+      <button className='lbn' onClick={handleLogin}>Login</button>
+      <div className='login-links'>
+        <p>Don't have an account? <a href="/reg">Register</a></p>
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;

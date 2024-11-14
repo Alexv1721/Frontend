@@ -9,8 +9,10 @@ const initialState = {
 }
 
 export const fetchorder = createAsyncThunk('order/fetchorder', async () => {
-    const res = await axios.get('http://localhost:5000/order/orders')
-    return res.data
+    const res = await axios.get('http://localhost:5000/order/orders',
+        {headers:{Authorization:localStorage.getItem('token')}}
+    )
+    return res.data.data
 })
 
 export const order = createSlice(

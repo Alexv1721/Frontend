@@ -1,28 +1,65 @@
-import React, { useState } from 'react'
-import '../styles/register.css'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import '../styles/register.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 const Register = () => {
-    const [uname,setuname]=useState('')
-    const [password,setpassword]=useState('')
-    const [confirmpassword,setconfirmpassword]=useState('')
-    const [email,setemail]=useState('')
-   const[formdata,setformdata]=useState({username:'',email:'',password:'',confirmpassword:''})
-   async function handlebackend(){
-try{
-    const userregiter=await axios.post('http://localhost:5000/api/register',formdata).then((msg)=>console.log(msg)
-    ).catch(err=>console.log(err)
-    )
-}
-catch(err){
-    console.log(err);
-    
-}
-   }
-    const handleSubmit =(e) => {
-        e.preventDefault();
-       setformdata({username:uname,email:email,password:password,confirmpassword:confirmpassword})
-      handlebackend()
-      };
+  const navigate = useNavigate();
+  const [isauth, setIsAuth] = useState(false);
+  const [uname, setUname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState({ username: '', email: '', password: '', confirmpassword: '' });
+  const [errors, setErrors] = useState({ username: '', email: '', password: '', confirmpassword: '' });
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setIsAuth(true);
+    }
+  }, []);
+
+  const validateForm = () => {
+    setErrors({ username: '', email: '', password: '', confirmpassword: '' });
+
+    if (!uname) {
+      setErrors((prevErrors) => ({ ...prevErrors, username: 'Username is required' }));
+      return false;
+    }
+    if (!email) {
+      setErrors((prevErrors) => ({ ...prevErrors, email: 'Email is required' }));
+      return false;
+    }
+    if (password !== confirmpassword) {
+      setErrors((prevErrors) => ({ ...prevErrors, confirmpassword: 'Passwords do not match' }));
+      return false;
+    }
+    return true;
+  };
+
+  async function handleBackend() {
+    try {
+      const response = await axios.post('http://localhost:5000/user/register', formData);
+      navigate('/login');
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        if (error.response.data.message.includes('User already exists')) {
+          setErrors((prevErrors) => ({ ...prevErrors, email: 'User already exists, please login' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, general: 'An error occurred, please try again.' }));
+        }
+      }
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormData({ username: uname, email, password, confirmpassword });
+    if (validateForm()) {
+      handleBackend();
+    }
+  };
+
   return (
     <div className="container">
       <form className="registration-form" onSubmit={handleSubmit}>
@@ -32,29 +69,30 @@ catch(err){
         <input
           type="text"
           id="username"
-          name="username"
           value={uname}
-          onChange={(e)=>setuname(e.target.value) }
+          onChange={(e) => setUname(e.target.value)}
+          className={errors.username ? 'input-error-custom' : ''}
           required
         />
+        <span className="form-error-custom">{errors.username}</span>
 
         <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
-          name="email"
           value={email}
-          onChange={(e)=>setemail(e.target.value) }
+          onChange={(e) => setEmail(e.target.value)}
+          className={errors.email ? 'input-error-custom' : ''}
           required
         />
+        <span className="form-error-custom">{errors.email}</span>
 
         <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
-          name="password"
           value={password}
-          onChange={(e)=>setpassword(e.target.value) }
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
@@ -62,16 +100,20 @@ catch(err){
         <input
           type="password"
           id="confirmPassword"
-          name="confirmPassword"
           value={confirmpassword}
-          onChange={(e)=>setconfirmpassword(e.target.value) }
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className={errors.confirmpassword ? 'input-error-custom' : ''}
           required
         />
+        <span className="form-error-custom">{errors.confirmpassword}</span>
 
-        <button type="submit">Register</button>
+        <button type="submit" className="regbn">Register</button>
+        <p className="login-prompt">
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

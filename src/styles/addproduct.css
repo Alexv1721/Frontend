@@ -1,0 +1,59 @@
+/* Container Styling */
+.add-product-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Form Styling */
+  .add-product-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-product-form select,
+  .add-product-form input[type="text"],
+  .add-product-form input[type="number"] {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s;
+  }
+  
+  .add-product-form select:focus,
+  .add-product-form input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Button Styling */
+  .add-product-form button {
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-product-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error Message Styling */
+  .add-product-form .error {
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-top: -0.75rem;
+    margin-bottom: 1rem;
+  }
+  

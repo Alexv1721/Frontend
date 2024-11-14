@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState={
-    uname:'Alex'
+    uname:''
     ,
-    password:'alex'
+    password:''
     ,session:0
 }
 export const login=createSlice({

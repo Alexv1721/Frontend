@@ -6,14 +6,12 @@ import { fetchproduct } from '../app/productsSlice'
 import '../styles/pro.css'
 const Product = ({cato,vis,search,setsearch,ses,setses}) => {
   const pro=useSelector((state)=>state.pro.products)
-  console.log(pro);
-  
+
 const nav=useNavigate()
     const status=useSelector((state)=>state.pro.status)
     const err=useSelector((state)=>state.pro.err)
 const ser=useSelector((state)=>state.search.val)
    const dis=useDispatch()
-console.log(ser);
 
 
    useEffect(()=>{
@@ -30,7 +28,7 @@ if(ses=='/'){
 else
 nav(`/buy/${id}`)
     }
-    
+  
   return (
     
     <div className='products'>
@@ -40,12 +38,13 @@ nav(`/buy/${id}`)
 
 ser=='' || ser=='undifined'?
 
+
         vis?pro.map((item,index)=>{
 
        
           return(
             
-              <div className='pro' key={item.id} onClick={()=>handlenavigate(item._id)}>
+              <div className='pro' key={item._id} onClick={()=>handlenavigate(item._id)}>
           
           <img className='proimg' src={item.image} alt="" />
           
@@ -61,9 +60,9 @@ ser=='' || ser=='undifined'?
           }):
 pro.map((item,index)=>{
 
-if(item.category==cato && cato!='')
+if(item.cat==cato && cato!='')
 return(
-    <div className='pro' key={item.id} onClick={()=>handlenavigate(item.id)}>
+    <div className='pro' key={item._id} onClick={()=>handlenavigate(item.id)}>
 <img className='proimg' src={item.image} alt="" />
 
 <div className='title'>{item.title.length>20? item.title.slice(0,20):item.title}</div>
@@ -81,7 +80,7 @@ return(
   pro.map((item,index)=>{
        if(item.title.includes(ser) ||item.description.includes(ser) )
     return(
-        <div className='pro' key={item.id} onClick={()=>handlenavigate(item._id)}>
+        <div className='pro' key={item._id} onClick={()=>handlenavigate(item._id)}>
     <img className='proimg' src={item.image} alt="" />
     
     <div className='title'>{item.title.length>20? item.title.slice(0,20):item.title}</div>

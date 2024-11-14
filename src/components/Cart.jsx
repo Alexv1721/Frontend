@@ -5,7 +5,8 @@ import { removecart, emtycart, fetchcart } from '../app/cartSlice';
 import { placeorder } from '../app/orderSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContainer } from 'react-toastify';
+import PopupMessage from './opupMessage';
 const Cart = () => {
   const cart = useSelector((state) => state.cart.carts);
   const status = useSelector((state) => state.cart.status);
@@ -14,6 +15,7 @@ const Cart = () => {
   const discount = [10, 2, 12, 4, 5, 8, 22, 6, 23, 5, 2, 6, 1, 0, 7, 3];
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const[count,setcount]=useState(1)
   useEffect(() => {
     dispatch(fetchcart());
   }, []);
@@ -24,6 +26,9 @@ const Cart = () => {
   }, [cart]);
 
   function handleSel(val, id) {
+    console.log();
+    
+    setcount(val)
     const existingItem = select.find((item) => item.id === id);
     if (existingItem) {
       const updatedSelect = select.map((item) =>
@@ -67,13 +72,20 @@ const Cart = () => {
   }
 
   async function handleremove(id) {
-    dispatch(removecart(id));
-    setPrice([]);
 
+    PopupMessage({ message: 'Product removed from cart!', type: 'warn' });
     try{
-const res=await axios.delete(`http://localhost:5000/cart/delcart/${id}`)
-    }
+const res=await axios.delete(`http://localhost:5000/cart/delcart/${id}`,{headers:{Authorization:localStorage.getItem('token')}})
+const d=await res.data    
+
+setTimeout(() => {
+  navigate('/');
+}, 2000);
+dispatch(removecart(id));
+setPrice([]);
+}
     catch(err){
+console.log(err);
 
     }
 
@@ -98,10 +110,9 @@ cart.forEach(
     }})
 }
 )
-console.log('items',items);
 
 try{
-  await axios.post(`http://localhost:5000/order/addorders`,items)
+  await axios.post(`http://localhost:5000/order/addorders`,{},{headers:{Authorization:localStorage.getItem('token')}})
 }
 catch(err){
   console.log('error in adding',err.message);
@@ -113,16 +124,17 @@ catch(err){
       const val = selectedCart[0].price * handlep(id);
       setPrice(val);
       handleremove(id);
+      console.log('count',count);
       
    try{
-    await axios.post(`http://localhost:5000/order/addorder/${id}`)
+    await axios.post(`http://localhost:5000/order/addorder/${id}`,{count:count},{headers:{Authorization:localStorage.getItem('token')}})
    }
    catch(err){
     console.log(err.message);
     
    }
     }
-    navigate('/');
+
   }
 
   if (status === 'loading') {
@@ -165,7 +177,6 @@ catch(err){
           </div>
         </div>
       ))}
-
       {cart.length !== 0 ? (
         <div className='pdetails'>
           <div>
@@ -179,8 +190,8 @@ catch(err){
           </div>
           <div style={{ marginTop: '37px' }}>
             <p>{price.reduce((a, i) => (a += i), 0)}</p>
-            <p>{Math.round(Math.random() * 15 - 1)}%</p>
-            <p>{Math.round(Math.random() * 15 - 1)} $</p>
+            <p>10%</p>
+            <p>1$</p>
             <p className='del'>
               <span className='delfree'>$40</span> Free
             </p>
@@ -195,6 +206,7 @@ catch(err){
           Nothing Added <button className='gbn' onClick={() => navigate('/')}>Go Home</button>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };

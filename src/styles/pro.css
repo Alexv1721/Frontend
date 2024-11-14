@@ -5,6 +5,7 @@
     gap: 2%;
     padding: 20px;
     animation: fadeIn 0.5s ease-in-out;
+    
   }
   
   @keyframes fadeIn {
@@ -73,13 +74,19 @@ background-color: #ffffff (White);
     font-weight: bold;
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 740px) {
     .products {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
   
-  @media screen and (max-width: 540px) {
+  @media screen and (max-width: 620px) {
+    .products {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media screen and (max-width: 620px) {
     .products {
       grid-template-columns: 1fr 1fr;
     }
